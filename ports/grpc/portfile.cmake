@@ -40,6 +40,10 @@ vcpkg_check_features(
         codegen gRPC_BUILD_CODEGEN
 )
 
+if (NOT gRPC_SSL_PROVIDER)
+   set(gRPC_SSL_PROVIDER "package")
+endif()
+
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}"
     OPTIONS ${FEATURE_OPTIONS}
@@ -48,7 +52,7 @@ vcpkg_cmake_configure(
         -DgRPC_STATIC_LINKING=${gRPC_STATIC_LINKING}
         -DgRPC_MSVC_STATIC_RUNTIME=${gRPC_MSVC_STATIC_RUNTIME}
         -DgRPC_ZLIB_PROVIDER=package
-        -DgRPC_SSL_PROVIDER=package
+        -DgRPC_SSL_PROVIDER=${gRPC_SSL_PROVIDER}
         -DgRPC_PROTOBUF_PROVIDER=package
         -DgRPC_ABSL_PROVIDER=package
         -DgRPC_UPB_PROVIDER=package
